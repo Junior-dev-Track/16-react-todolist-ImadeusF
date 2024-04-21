@@ -8,6 +8,7 @@ const TodoList = () => {
     { id: 3, text: "My third todo", completed: false },
   ];
   const [todos, setTodos] = useState(initialTodos);
+  
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) => {
