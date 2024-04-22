@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./App.css";
 import "./TodoList.css";
 
+let idCounter = 1;
+
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [addTask, setAddTask] = useState("");
@@ -11,7 +13,7 @@ const TodoList = () => {
   const addNewtask = () => {
     if (addTask.trim() !== "") {
       const newTodo = {
-        id: todos.length + 1,
+        id: idCounter,
         /*name: inputRef.current.value,*/
         name: addTask,
         done: false,
@@ -20,7 +22,12 @@ const TodoList = () => {
       setTodos([...todos, newTodo]);
       /*inputRef.current.value = "";*/
       setAddTask("");
+      idCounter++;
     }
+  };
+
+  const deleteTask = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const handleCheck = (id) => {
@@ -30,7 +37,6 @@ const TodoList = () => {
           return {
             ...todo, // Updating todo in changing state
             done: !todo.done,
-            name: todo.done ? <s>{todo.name}</s> : todo.name,
           };
         }
         return todo;
@@ -40,6 +46,10 @@ const TodoList = () => {
   /* si hook ref, pas besoin de handleInputchange */
   const handleInputchange = (e) => {
     setAddTask(e.target.value);
+  };
+
+  const toggleStyle = (text, done) => {
+    return done ? <s>{text}</s> : text;
   };
 
   return (
@@ -73,11 +83,15 @@ const TodoList = () => {
               />{" "}
               <div className="Taskname">
                 {/* Add a space between button and text */}
-                {todo.name}
+                {toggleStyle(todo.name, todo.done)}
               </div>
               <div className="container_btn">
-                <button className="btnedit">Edit</button>
-                <button className="btndel">Delete</button>
+                <button className="btnedit" onClick={() => editTask(todo.id)}>
+                  Edit
+                </button>
+                <button className="btndel" onClick={() => deleteTask(todo.id)}>
+                  Delete
+                </button>
               </div>
             </li>
           ))}
