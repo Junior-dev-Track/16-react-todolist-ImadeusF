@@ -1,0 +1,51 @@
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.Taskname {
+  display: flex;
+  justify-content: flex-start;
+  width: 60%;
+}
+
+.container_btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.btn,
+.btnedit,
+.btndel {
+  border: 1px solid black;
+  height: 40px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.btn {
+  width: 150px;
+}
+
+.btn:hover {
+  background-color: rgb(186, 188, 187);
+}
+
+.btnedit {
+  background-color: #ef993c;
+  margin-left: auto; /* Move button to the right */
+  width: 100px;
+}
+
+.btndel {
+  background-color: #e06262;
+  margin-left: auto; /* Move button to the right */
+  width: 100px;
+}

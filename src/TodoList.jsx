@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 /*import { useRef } from "react";*/
 import "./App.css";
+import "./TodoList.css";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -29,6 +30,7 @@ const TodoList = () => {
           return {
             ...todo, // Updating todo in changing state
             done: !todo.done,
+            name: todo.done ? <s>{todo.name}</s> : todo.name,
           };
         }
         return todo;
@@ -69,8 +71,14 @@ const TodoList = () => {
                 checked={todo.done}
                 onChange={() => handleCheck(todo.id)}
               />{" "}
-              {/* Add a space between button and text */}
-              {todo.name}
+              <div className="Taskname">
+                {/* Add a space between button and text */}
+                {todo.name}
+              </div>
+              <div className="container_btn">
+                <button className="btnedit">Edit</button>
+                <button className="btndel">Delete</button>
+              </div>
             </li>
           ))}
         </ul>

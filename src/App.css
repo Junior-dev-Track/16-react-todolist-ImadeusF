@@ -4,17 +4,3 @@
   padding: 2rem;
   text-align: center;
 }
-
-li {
-  list-style: none;
-  text-align: left;
-}
-
-.btn {
-  border: 1px solid black;
-  margin-left: 10px;
-}
-
-.btn:hover {
-  background-color: rgb(186, 188, 187);
-}
