@@ -1,35 +1,61 @@
 import React, { useState } from "react";
+/*import { useRef } from "react";*/
 import "./App.css";
 
 const TodoList = () => {
-  const initialTodos = [
-    { id: 1, text: "My first todo", completed: false },
-    { id: 2, text: "My second todo", completed: false },
-    { id: 3, text: "My third todo", completed: false },
-  ];
-  const [todos, setTodos] = useState(initialTodos);
-  
-  const toggleTodo = (id) => {
+  const [todos, setTodos] = useState([]);
+  const [addTask, setAddTask] = useState("");
+  /*const inputRef = useRef();*/
+
+  const addNewtask = () => {
+    if (addTask.trim() !== "") {
+      const newTodo = {
+        id: todos.length + 1,
+        /*name: inputRef.current.value,*/
+        name: addTask,
+        done: false,
+      };
+
+      setTodos([...todos, newTodo]);
+      /*inputRef.current.value = "";*/
+      setAddTask("");
+    }
+  };
+
+  const handleCheck = (id) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo, // Updating todo in changing state
-            completed: !todo.completed,
+            done: !todo.done,
           };
-        } else {
-          return todo;
         }
+        return todo;
       })
     );
+  };
+  /* si hook ref, pas besoin de handleInputchange */
+  const handleInputchange = (e) => {
+    setAddTask(e.target.value);
   };
 
   return (
     <>
       <div>
         <h1>Imadeus Todo List</h1>
-        <input type="text" name="todo" id="todo" placeholder="Add a new todo" />
-        <button className="btn">Add a to do</button>
+        <input
+          type="text"
+          /*ref={inputRef}*/
+          value={addTask}
+          name="todo"
+          id="todo"
+          placeholder="Add a new todo"
+          onChange={handleInputchange}
+        />
+        <button className="btn" onClick={addNewtask}>
+          Add a to do
+        </button>
         <hr></hr>
         <h2>My Todos</h2>
         <ul>
@@ -38,11 +64,13 @@ const TodoList = () => {
               {/* Assign a unique key to each list item */}
               <input
                 type="checkbox"
-                checked={todo.completed}
-                onChange={() => toggleTodo(todo.id)}
+                id={todo.id}
+                name={todo.name}
+                checked={todo.done}
+                onChange={() => handleCheck(todo.id)}
               />{" "}
               {/* Add a space between button and text */}
-              {todo.text}
+              {todo.name}
             </li>
           ))}
         </ul>
