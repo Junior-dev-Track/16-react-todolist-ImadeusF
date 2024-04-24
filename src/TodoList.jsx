@@ -47,12 +47,21 @@ const TodoList = () => {
     window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
   }, [todos]);
 
+  const handleDelall = () => {
+    const taskstodelete = todos.filter((todo) => !todo.done);
+    setTodos(taskstodelete);
+  };
+
+  // Activate the button and change color if at least 2 task checked
+  const checkedCount = todos.filter((todo) => todo.done).length;
+  const btnclass = checkedCount >= 2 ? "btndelallactive" : "btndelall";
+
   return (
     <>
       <div>
         <h1>Imadeus Todo List</h1>
         <TaskForm handleAdd={handleAdd} />
-        <h2>My Todos</h2>
+        <h2>My Todos ({todos.length})</h2>
         <ul>
           {todos.map((todo) => (
             <Task
@@ -63,6 +72,17 @@ const TodoList = () => {
             />
           ))}
         </ul>
+        <div>
+          <p>
+            Todo still needs to be completed :{" "}
+            {todos.filter((todo) => !todo.done).length}
+          </p>
+        </div>
+        <div>
+          <button className={btnclass} onClick={handleDelall}>
+            Delete all the ckecked tasks
+          </button>
+        </div>
       </div>
     </>
   );

@@ -24,7 +24,8 @@ li {
 
 .btn,
 .btnedit,
-.btndel {
+.btndel,
+.btndelactive {
   border: 1px solid black;
   height: 40px;
   margin-left: 0.5rem;
@@ -45,7 +46,34 @@ li {
 }
 
 .btndel {
+  pointer-events: none;
+  background-color: #999999;
+  /*background-color: #e06262;*/
+  margin-left: auto; /* Move button to the right */
+  width: 100px;
+}
+
+.btndelactive {
+  pointer-events: auto;
   background-color: #e06262;
   margin-left: auto; /* Move button to the right */
   width: 100px;
+  cursor: pointer;
+}
+
+p {
+  font-weight: bold;
+}
+
+.btndelall {
+  pointer-events: none;
+  background-color: #999999;
+  /*background-color: #e06262;*/
+  margin-left: auto; /* Move button to the right */
+  width: 100%;
+}
+
+.btndelallactive {
+  background-color: #efa61e;
+  width: 100%;
 }

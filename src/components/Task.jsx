@@ -2,6 +2,9 @@ export default function Task({ taskInfo, onTaskDelete, handleCheck }) {
   const toggleStyle = (text, done) => {
     return done ? <s>{text}</s> : text;
   };
+
+  const btnclass = taskInfo.done ? "btndelactive" : "btndel";
+
   //affichage (render)
   return (
     <li>
@@ -18,10 +21,11 @@ export default function Task({ taskInfo, onTaskDelete, handleCheck }) {
         {toggleStyle(taskInfo.name, taskInfo.done)}
       </div>
       <div className="container_btn">
-        <button className="btnedit" onClick={() => editTask(taskInfo.id)}>
+        {/*<button className="btnedit" onClick={() => editTask(taskInfo.id)}>
           Edit
-        </button>
-        <button className="btndel" onClick={() => onTaskDelete(taskInfo.id)}>
+  </button>*/}
+
+        <button className={btnclass} onClick={() => onTaskDelete(taskInfo.id)}>
           Delete
         </button>
       </div>
