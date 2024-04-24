@@ -1,7 +1,10 @@
-export default function Task({ taskInfo, onTaskDelete }) {
+export default function Task({ taskInfo, onTaskDelete, handleCheck }) {
+  const toggleStyle = (text, done) => {
+    return done ? <s>{text}</s> : text;
+  };
   //affichage (render)
   return (
-    <li key={taskInfo.id}>
+    <li>
       {/* Assign a unique key to each list item */}
       <input
         type="checkbox"
@@ -12,8 +15,7 @@ export default function Task({ taskInfo, onTaskDelete }) {
       />{" "}
       <div className="Taskname">
         {/* Add a space between button and text */}
-        {/*toggleStyle(taskInfo.name, taskInfo.done)*/}
-        {taskInfo.name}
+        {toggleStyle(taskInfo.name, taskInfo.done)}
       </div>
       <div className="container_btn">
         <button className="btnedit" onClick={() => editTask(taskInfo.id)}>

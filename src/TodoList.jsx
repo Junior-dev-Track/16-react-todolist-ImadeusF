@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "./TodoList.css";
 import Task from "./components/Task";
 import TaskForm from "./components/TaskForm";
 
+const LSKEY = "MyTodoApp";
+
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
+  // We retrieve info if there is data in the localstorage
+  const [todos, setTodos] = useState(() => {
+    const storedTodos = localStorage.getItem(LSKEY + ".todos");
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
 
   const handleDelete = (id) => {
     const todoCopy = [...todos];
@@ -36,14 +42,11 @@ const TodoList = () => {
     setTodos(taskCopy);
   };
 
-  const handleInputchange = (e) => {
-    setAddTask(e.target.value);
-  };
-  /*
-  const toggleStyle = (text, done) => {
-    return done ? <s>{text}</s> : text;
-  };
-*/
+  // Save todos to localStorage
+  useEffect(() => {
+    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <>
       <div>
@@ -52,7 +55,12 @@ const TodoList = () => {
         <h2>My Todos</h2>
         <ul>
           {todos.map((todo) => (
-            <Task taskInfo={todo} onTaskDelete={handleDelete} />
+            <Task
+              taskInfo={todo}
+              onTaskDelete={handleDelete}
+              handleCheck={handleCheck}
+              key={todo.id}
+            />
           ))}
         </ul>
       </div>

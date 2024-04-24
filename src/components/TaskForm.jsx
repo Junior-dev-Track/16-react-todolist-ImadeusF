@@ -20,6 +20,7 @@ export default function TaskForm({ handleAdd }) {
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
+
   return (
     <form action="submit" onSubmit={handleSubmit}>
       <input
@@ -28,7 +29,7 @@ export default function TaskForm({ handleAdd }) {
         placeholder="Add a new todo"
         onChange={handleChange}
       />
-      <button>Ajouter +</button>
+      <button className="btn">Ajouter +</button>
     </form>
   );
 }
