@@ -50,7 +50,7 @@ const TodoList = () => {
   return (
     <>
       <div>
-        <h1>Imadeus Todo List</h1>
+        <h1>Todo List</h1>
         <input
           type="text"
           /*ref={inputRef}*/
